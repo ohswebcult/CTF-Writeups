@@ -2,14 +2,15 @@ This is a writeup for the [NGACTF](https://nicerc.org/events/nga-capture-the-fla
 For this challenge the only file provided is an executiable binary.
 ### Inital steps
 The best idea is to first get a basic idea of what security mesaures are already present in the binary so we know what is feasible and what is not. Running checksec will provide exactly the information we desire. 
->troy@troyscomputer$ checksec container
->    Arch:     i386-32-little
->    RELRO:    Partial RELRO
->    Stack:    No canary found
->    NX:       NX disabled
->    PIE:      PIE enabled
->    RWX:      Has RWX segments
-
+```shell
+troy@troyscomputer$ checksec container
+Arch:     i386-32-little
+RELRO:    Partial RELRO
+Stack:    No canary found
+NX:       NX disabled
+PIE:      PIE enabled
+RWX:      Has RWX segments
+```
 We can see that there are no stack canarries (so buffer overflows will be possible) as well as NX is disabled so the stack is executiable. 
 ### Getting a closer look
 As they didn't provide source code, let's get a better look at whats going on by firing up [Ghidra](https://ghidra-sre.org/)
@@ -112,7 +113,7 @@ print(r.recvline())
 r.interactive()
 ```
 A sample run:
-```
+```shell
 troy@troyscomputer$ python maker.py
 [+] Opening connection to golf.virginiacyberrange.net on port 40149: Done
 Okay, I'll run the contents of your premium container!
