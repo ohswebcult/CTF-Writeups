@@ -65,13 +65,13 @@ Great. All we need to do is select option 1, enter some x86 linux shellcode that
 [Shell Storm](http://shell-storm.org/shellcode/) is a great website that houses short snipits of machine code that do specific things. As this is a 32 bit linux executable we only want shellcode that for x86 linux.
 [This shellcode](http://shell-storm.org/shellcode/files/shellcode-752.php) is perferect for our needs. It is equilivant to execve("/bin/sh") and happens to be nice and short at 21 bytes. Unfourtantly this is too long for buf10 because `fgets((char *)buf10,10,stdin);` will copy at most 9 characters into buf10 (don't forget the null-byte). However we can put the longer shell code into the bigger buffer and put code that simply jumps to the larger buffer into the 10 byte buffer.
 The disassembly in Ghidra before the fgets call will tell us that the 60 byte buffer always starts 0x52 bytes below EBP.
-```assembly_x86
+```assembly
 LEA        EAX=>buf60,[EBP -0x52]
 PUSH       EAX
 CALL       fgets
 ```
 The code we need will have to jump to EBP -0x52 in order to invoke the 21 byte shellcode there. With the help of [this website](https://defuse.ca/online-x86-assembler.htm) creating the machine code is easy.
-```assembly_x86
+```assembly
 mov    eax,ebp
 sub    eax,0x52
 jmp    eax
