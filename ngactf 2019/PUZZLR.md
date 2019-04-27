@@ -86,9 +86,9 @@ Now we know that the file is a gcode file, we can use an online gcode viewer to 
    The assembly of the pieces cannot occur with just a render of the overall puzzle. We need the individual pieces along with the letters. You could 3-D print the entire puzzle but that isn't ideal considering that this CTF only lasted 1 day. So to overcome this obstacle what you need is an online viewer that can model a 2-D perspective along with a sheet filter that can transition between certain layers of the pieces.
    
    LINK- http://www.gcodeanalyser.com/
-   ![](heys.jpg)
+   ![](heart1.jpg)
    At this point we can fire up `MS Powerpoint` and solve the puzzle. To reach this step though, you first need to crop out each individual piece and change the background to transparent so that way when you are merging the pieces, there isn't any overlap in the backgrounds. Fitting the pieces together will form a shape that relates back to our hint.
-   ![](heart.jpg)
+   ![](heart2.jpg)
    At this point, the message can be read starting from the bottom piece(v) and going all the way around clockwise: ViRgiNiaIZ4LuVrz
    
    THE END
