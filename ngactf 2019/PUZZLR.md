@@ -87,10 +87,10 @@ Now we know that the file is a gcode file, we can use an online gcode viewer to 
    
    LINK- http://www.gcodeanalyser.com/
    
-   ![](heart1.jpg)
+   ![](heart1.JPG)
    At this point we can fire up `MS Powerpoint` and solve the puzzle. To reach this step though, you first need to crop out each individual piece and change the background to transparent so that way when you are merging the pieces, there isn't any overlap in the backgrounds. Fitting the pieces together will form a shape that relates back to our hint.
    
-   ![](heart2.jpg)
+   ![](heart2.JPG)
    At this point, the message can be read starting from the bottom piece(v) and going all the way around clockwise: ViRgiNiaIZ4LuVrz
    
    THE END
