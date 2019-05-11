@@ -12,5 +12,15 @@ After decoding it, we get a PNG image
 ```shell
 base64 -d base64text > image.png
 ```
+![base64decodedimage](image.png)
 
+Given the challenge name is blues, it looks like this is the correct path
+Taking a look at the hex values of the colors in each of the circles reveals
+`000048 000069 000064 000069
+00006e 000067 000044 000061
+000074 000061 000049 000073
+000050 000068 000075 00006e`
+
+Taking just the blue color values we get `486964696e674461746149735068756e`
+which when decoded from hex gives us the flag *HidingDataIsPhun*
 
