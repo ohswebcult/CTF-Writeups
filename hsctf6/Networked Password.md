@@ -7,7 +7,7 @@ The instant you find that a character doesn't match, you return and stop compari
 The issue is that this allows us to bruteforce one character at a time, instead of the entire password at a time. This decreases the amount of tries we have to make significantly.
 
 Here's the script:
-```
+```javascript
 const request=require("request")
 
 let str="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_-!@#$%^&*()}"
